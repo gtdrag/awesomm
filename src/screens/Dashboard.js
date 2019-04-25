@@ -1,72 +1,31 @@
-/* eslint-disable no-alert */
-/* eslint-disable react/prop-types */
-import React from 'react';
-import { StyleSheet, SafeAreaView } from 'react-native';
-import store from 'react-native-simple-store';
-import colors from '../theme/Colors';
-import { responsiveSize } from '../utils/dimensions';
-import { Button } from '../components';
-// eslint-disable-next-line import/no-cycle
+import React from "react";
+import { Image, SafeAreaView, View, ImageBackground, TouchableOpacity, Text} from "react-native";
+import { DrawerActions } from 'react-navigation';
+import store from "react-native-simple-store";
 
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.principal,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  componentsContainer: {
-    paddingHorizontal: responsiveSize(50),
-    marginBottom: responsiveSize(10),
-  },
-  buttonSignIn: {
-    borderColor: colors.white,
-    borderWidth: 2,
-    backgroundColor: 'transparent',
-    borderRadius: 5,
-    width: '100%',
-  },
-  buttonSignUp: {
-    backgroundColor: colors.white,
-    width: '100%',
-    borderRadius: 5,
-  },
-  logoContainer: {
-    padding: responsiveSize(20),
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  logo: {
-    width: '100%',
-  },
-  imageContainer: {
-    padding: responsiveSize(20),
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  imageStyle: {
-    width: responsiveSize(220),
-    height: responsiveSize(155),
-    borderRadius: 13,
-  },
-});
 
 class Dashboard extends React.Component {
-  static options = () => ({ topBar: { visible: false, height: 0 } });
-
   componentDidMount() {
-    store.get('user').then(result => {
-      alert(JSON.stringify(result));
+    store.get("user").then(result => {
+      console.log(result);
     });
   }
 
   render() {
     const { componentId } = this.props;
     return (
-      <SafeAreaView style={styles.container}>
-        <Button text="Go back" onPress={() => goBack(componentId)} />
-      </SafeAreaView>
+      <View style={{ width: "100%", height: "100%", backgroundColor: "white" }}>
+        <ImageBackground source={require("../assets/images/bg_circle_pattern.png")} style={{ height: 200, width: '100%'}}>
+        <TouchableOpacity hitSlop={{top: 10, bottom: 10, left: 10, right: 10}} onPress={() => this.props.navigation.dispatch(DrawerActions.openDrawer())} style={{marginTop:40, marginLeft:15,}}>
+          <Image source={require('../assets/images/icon_menu_black_notext.png')} resizeMode='contain' style={{ width: 24,}}/>
+        </TouchableOpacity>
+        </ImageBackground>
+        <View style={{backgroundColor: '#eee', width: '100%', height: 1}} />
+        <SafeAreaView
+          style={{ alignItems: "center", flexDirection: "column", flexGrow: 1,}}>
+          <Text>Dashboard View</Text>
+        </SafeAreaView>
+      </View>
     );
   }
 }

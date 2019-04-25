@@ -1,21 +1,21 @@
-/* eslint-disable func-names */
-/* eslint-disable react/prefer-stateless-function */
-/* eslint-disable no-underscore-dangle */
-/* eslint-disable no-global-assign */
-/* eslint-disable no-undef */
 import React from 'react';
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 import Login from './src/screens/Login';
-
+import Drawer from './src/Drawer';
 
 console.disableYellowBox = true;
 
 
 const RootStack = createStackNavigator({
-  Login: {
-    screen: Login,
-  },
+  Login,
+  Drawer,
   initialRouteName: 'Login',
+},
+{
+  headerMode: 'none',
+  navigationOptions: {
+      headerVisible: false,
+  }
 });
 
 
