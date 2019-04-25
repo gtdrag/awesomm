@@ -19,8 +19,8 @@ export default class Login extends React.Component {
     this.state = {
       isLoading: false,
       error: null,
-      username: '19999 ',
-      password: '19991',
+      username: '',
+      password: '',
       deviceToken: '',
       rememberMe: false,
     };
